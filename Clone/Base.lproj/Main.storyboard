@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Clone" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iJ9-k1-LIi">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ict-q5-DAi">
+                                        <rect key="frame" x="20" y="493" width="335" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UJW-f4-e1n">
+                                        <rect key="frame" x="10" y="318" width="355" height="30"/>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ict-q5-DAi" firstAttribute="leading" secondItem="iJ9-k1-LIi" secondAttribute="leading" constant="20" id="4Eg-KL-Oq8"/>
+                                    <constraint firstItem="UJW-f4-e1n" firstAttribute="leading" secondItem="iJ9-k1-LIi" secondAttribute="leading" constant="10" id="CPD-cn-Uw3"/>
+                                    <constraint firstItem="UJW-f4-e1n" firstAttribute="centerX" secondItem="iJ9-k1-LIi" secondAttribute="centerX" id="CnV-GW-muW"/>
+                                    <constraint firstAttribute="bottom" secondItem="ict-q5-DAi" secondAttribute="bottom" constant="100" id="Jfg-iW-O2J"/>
+                                    <constraint firstAttribute="width" constant="375" id="LiI-A5-4dg"/>
+                                    <constraint firstAttribute="trailing" secondItem="ict-q5-DAi" secondAttribute="trailing" constant="20" id="SFj-cH-C6k"/>
+                                    <constraint firstAttribute="trailing" secondItem="UJW-f4-e1n" secondAttribute="trailing" constant="10" id="cQF-Gd-h4A"/>
+                                    <constraint firstItem="ict-q5-DAi" firstAttribute="centerX" secondItem="iJ9-k1-LIi" secondAttribute="centerX" id="ca3-0Q-pCc"/>
+                                    <constraint firstItem="UJW-f4-e1n" firstAttribute="centerY" secondItem="iJ9-k1-LIi" secondAttribute="centerY" id="fwt-kX-7Qu"/>
+                                    <constraint firstItem="ict-q5-DAi" firstAttribute="top" secondItem="UJW-f4-e1n" secondAttribute="bottom" constant="145" id="kg0-mY-pi3"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="iJ9-k1-LIi" secondAttribute="bottom" id="DFc-OB-LOY"/>
+                            <constraint firstItem="iJ9-k1-LIi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="DWZ-RH-tmu"/>
+                            <constraint firstItem="iJ9-k1-LIi" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="acz-pD-kdA"/>
+                            <constraint firstAttribute="trailing" secondItem="iJ9-k1-LIi" secondAttribute="trailing" id="g64-4M-YE9"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="first" destination="UJW-f4-e1n" id="C32-J2-xI4"/>
+                        <outlet property="scrollView" destination="iJ9-k1-LIi" id="4tZ-aY-QsW"/>
+                        <outlet property="second" destination="ict-q5-DAi" id="LxY-cI-UJf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
