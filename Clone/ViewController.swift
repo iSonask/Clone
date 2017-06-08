@@ -263,3 +263,28 @@ extension ViewController: KeyboardDelegate {
     }
     
 }
+
+struct myNotification {
+    
+    static let notificationManager = LNRNotificationManager()
+    
+    static func showNotification(title : String , message: String,completion: @escaping(_ str: String) -> Void){
+        
+        notificationManager.notificationsPosition = .bottom
+        notificationManager.notificationsBackgroundColor = .appYellow
+        notificationManager.notificationsTitleTextColor = UIColor.black
+        notificationManager.notificationsBodyTextColor = UIColor.darkGray
+        notificationManager.notificationsSeperatorColor = UIColor.gray
+        
+        //        notificationManager.notificationsIcon = #imageLiteral(resourceName: "smallLogo")
+        
+        notificationManager.showNotification(notification: LNRNotification(title: title, body: message, duration: LNRNotificationDuration.default.rawValue, onTap: { () -> Void in
+            print("Notification dismissed")
+            completion("Notification Dissmissed")
+        }, onTimeout: { () -> Void in
+            print("Notification Timed Out")
+            completion("Notification Timed Out")
+        }))
+        
+    }
+}
