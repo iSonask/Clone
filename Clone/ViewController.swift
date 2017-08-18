@@ -290,8 +290,6 @@ struct myNotification {
 }
 
 
-
-
 typealias RESPONSEJSON = [String: Any]
 
 class Session {
