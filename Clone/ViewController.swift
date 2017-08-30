@@ -264,7 +264,7 @@ extension ViewController: KeyboardDelegate {
     
 }
 
-struct myNotification {
+/*struct myNotification {
     
     static let notificationManager = LNRNotificationManager()
     
@@ -287,7 +287,7 @@ struct myNotification {
         }))
         
     }
-}
+}*/
 
 
 
