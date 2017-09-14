@@ -20,6 +20,7 @@ class ViewController: BaseController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        //keyboard delegate and inputview for textfield as well as textview
         keyboard.delegate = self
         keyboard.addInputView(first)
         keyboard.addInputView(second)
@@ -45,11 +46,17 @@ class ViewController: BaseController {
             
         }
 
-        
+        //month picker of textfield
         first.inputView = monthYearPickerView
         second.inputView = monthYearPickerView
         
         
+        //for current controller , if current controller not exist the this will automatically return otherwise goes next line
+        unowned let weakSelf = self
+        
+        guard weakSelf == self else {
+            return
+        }
         
         
     }
