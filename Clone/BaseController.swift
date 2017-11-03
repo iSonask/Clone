@@ -247,3 +247,142 @@ extension UIView {
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+//FOR GOOGLE SIGN IN AND FACEBOOK SIGNIN
+
+//AppDelegate     
+//GIDSignInDelegate
+func application(_ application: UIApplication,
+                     open url: URL,
+                     sourceApplication: String?,
+                     annotation: Any) -> Bool {
+        if (GIDSignIn.sharedInstance().handle(url as URL!, sourceApplication: sourceApplication, annotation: annotation))
+        {
+            return true
+        }
+        else if (SDKApplicationDelegate.shared.application(
+            application,
+            open: url,
+            sourceApplication: sourceApplication,
+            annotation: annotation))
+        {
+            return true
+        }
+        return false
+    }
+
+public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        if (error == nil) {
+            // Perform any operations on signed in user here.
+            let userId = user.userID                  // For client-side use only!
+            let idToken = user.authentication.idToken // Safe to send to the server
+            let fullName = user.profile.name
+            let givenName = user.profile.givenName
+            let familyName = user.profile.familyName
+            let email = user.profile.email
+            // ...
+            print(email!,userId!,idToken!,fullName!,givenName!,familyName!,user.profile.imageURL(withDimension: 500))
+            
+            let root = self.window!.rootViewController as! UINavigationController
+            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            let signupV = mainStoryboard.instantiateViewController(withIdentifier: "SignupVC") as! SignupVC
+            signupV.stremail = email!
+            signupV.strFirstname = fullName!
+            
+            root.pushViewController(signupV, animated: true)
+
+
+        } else {
+            print("\(error.localizedDescription)")
+        }
+    }
+//LOGIN
+GIDSignIn.sharedInstance().uiDelegate = self//View didload
+
+//on googlebutton click
+GIDSignIn.sharedInstance().signIn()
+//onfacebook login click
+let loginManager = LoginManager()
+        print("LOGIN MANAGER: \(loginManager)")
+        loginManager.logIn([ .publicProfile, .email ], viewController: self) { loginResult in
+            print("LOGIN RESULT! \(loginResult)")
+            switch loginResult {
+            case .failed(let error):
+                print("FACEBOOK LOGIN FAILED: \(error)")
+            case .cancelled:
+                print("User cancelled login.")
+            case .success(let grantedPermissions, let declinedPermissions, let accessToken):
+                print("Logged in!")
+                print("GRANTED PERMISSIONS: \(grantedPermissions)")
+                print("DECLINED PERMISSIONS: \(declinedPermissions)")
+                print("ACCESS TOKEN \(accessToken)")
+                self.getFBUserData()
+            }
+        }
+
+
+fileprivate func  getFBUserData(){
+        if((AccessToken.current) != nil){
+            
+            GraphRequest(graphPath: "me", parameters: ["fields": "id, name, first_name, last_name, picture.type(large), email"]).start({ (connection, result) -> Void in
+                print(result)
+                switch result {
+                case .failed(let error):
+                    // Handle the result's error
+                    print(error)
+                    break
+                case .success(let graphResponse):
+                    if let responseDictionary = graphResponse.dictionaryValue {
+                        // Do something with your responseDictionary
+                        print(responseDictionary)
+                        print("email ============ ",responseDictionary["email"] as! String)
+                        print(responseDictionary["picture"] as Any )
+                        
+                        let main: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                        let vcontroller = main.instantiateViewController(withIdentifier: Constant.signup) as! SignupVC
+                        vcontroller.strFirstname = (responseDictionary["name"] as? String)!
+                        vcontroller.stremail = (responseDictionary["email"] as? String)!
+                        self.navigationController?.pushViewController(viewController: vcontroller, completion: {})
+                        
+                    }
+                }
+                
+            })
+        }
+    }
+
+//google signin delegate
+
+extension LoginVC: GIDSignInUIDelegate{
+    
+    internal func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+    }
+    
+    // Present a view that prompts the user to sign in with Google
+    internal func sign(_ signIn: GIDSignIn!,
+                       present viewController: UIViewController!) {
+        self.present(viewController, animated: true, completion: nil)
+    }
+    
+    // Dismiss the "Sign in with Google" view
+    internal func sign(_ signIn: GIDSignIn!,
+                       dismiss viewController: UIViewController!) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+//for signout
+ GIDSignIn.sharedInstance().signOut()
+ let login = LoginManager()//fb
+ login.logOut()
