@@ -103,3 +103,61 @@ class ImageCache {
         cache.setObject(image, forKey: key as NSString)
     }
 }
+
+
+
+// Image Cache with reload tableview
+
+
+
+let imageCache = NSCache<AnyObject, AnyObject>()
+var imageURLString : String?
+
+extension UIImageView {
+    
+    
+    public func imageFromServerURL(urlString: String, collectionView : UICollectionView, indexpath : IndexPath) {
+        imageURLString = urlString
+        
+        if let url = URL(string: urlString) {
+            
+            image = nil
+            
+            
+            if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
+                
+                self.image = imageFromCache
+                
+                return
+            }
+            
+            URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
+                
+                if error != nil{
+                    print(error as Any)
+                    
+                    
+                    return
+                }
+                
+                DispatchQueue.main.async(execute: {
+                    
+                    if let imgaeToCache = UIImage(data: data!){
+                        
+                        if imageURLString == urlString {
+                            self.image = imgaeToCache
+                        }
+                        
+                        imageCache.setObject(imgaeToCache, forKey: urlString as AnyObject)// calls when scrolling
+                        collectionView.reloadItems(at: [indexpath])
+                        
+                    }
+                })
+            }) .resume()
+        }
+    }
+    
+}
+
+
+
