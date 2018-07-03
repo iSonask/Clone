@@ -6,6 +6,8 @@
 //
 //
 
+import Foundation
+
 import UIKit
 
 
@@ -199,7 +201,7 @@ public class Keyboard: NSObject {
     
     // MARK: - Notification Observer
     
-    func orientationChanged(_ notification: Notification){
+    @objc func orientationChanged(_ notification: Notification){
         
         //        let device = UIDevice.current
         //        let isLandscape = UIDeviceOrientationIsLandscape(device.orientation)
@@ -214,27 +216,27 @@ public class Keyboard: NSObject {
         
     }
     
-    func keyboardWillShow(_ notification: Notification){
+    @objc func keyboardWillShow(_ notification: Notification){
         let keyboardNotification = KeyboardNotification(notification: notification)
         delegate?.keyboard?(self, willShow: keyboardNotification)
     }
     
-    func keyboardWillHide(_ notification: Notification){
+    @objc func keyboardWillHide(_ notification: Notification){
         let keyboardNotification = KeyboardNotification(notification: notification)
         delegate?.keyboard?(self, willHide: keyboardNotification)
     }
     
-    func keyboardDidHide(_ notification: Notification){
+    @objc func keyboardDidHide(_ notification: Notification){
         let keyboardNotification = KeyboardNotification(notification: notification)
         delegate?.keyboard?(self, didHide: keyboardNotification)
     }
     
-    func keyboardWillChangeFrame(_ notification: Notification){
+    @objc func keyboardWillChangeFrame(_ notification: Notification){
         let keyboardNotification = KeyboardNotification(notification: notification)
         delegate?.keyboard?(self, willChangeFrame: keyboardNotification)
     }
     
-    func inputViewDidStartEditing(_ notification: Notification){
+    @objc func inputViewDidStartEditing(_ notification: Notification){
         
         if let object = notification.object as? UIView, inputViews.contains(object){
             
@@ -250,15 +252,15 @@ public class Keyboard: NSObject {
     
     // MARK: - Actions
     
-    func previousButtonTapped() {
+    @objc func previousButtonTapped() {
         moveToPreviousInputField()
     }
     
-    func nextButtonTapped() {
+    @objc func nextButtonTapped() {
         moveToNextInputField()
     }
     
-    func doneButtonTapped() {
+    @objc func doneButtonTapped() {
         doneEditing()
     }
     
