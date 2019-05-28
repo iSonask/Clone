@@ -24,6 +24,54 @@ import UIKit
 //}
 //https://github.com/mmick66/KDRearrangeableCollectionViewFlowLayout
 
+
+
+
+
+class KDRearrangeableCollectionViewCell: UICollectionViewCell {
+    
+    @IBOutlet weak var titleLabel: UILabel!
+    
+    
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+    }
+    
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+    
+    var baseBackgroundColor : UIColor?
+    var dragging : Bool = false {
+
+        didSet {
+            
+            if dragging == true {
+                
+                self.baseBackgroundColor = self.backgroundColor
+                self.backgroundColor = UIColor.red
+                
+            } else {
+                
+                self.backgroundColor = self.baseBackgroundColor
+                
+            }
+        }
+    }
+    
+}
+
+
+
+
+
+
 protocol KDRearrangeableCollectionViewDelegate : UICollectionViewDelegate {
     func canMoveItem(at indexPath : IndexPath) -> Bool
     func moveDataItem(from source : IndexPath, to destination: IndexPath) -> Void
