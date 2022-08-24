@@ -1,3 +1,6 @@
+// take a look at this profile projects very handy for MVVM and overall development
+// https://github.com/edc0der
+
 import UIKit
 
 fileprivate let overlayViewTag: Int = 999
